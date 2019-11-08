@@ -81,7 +81,7 @@ def propagate(w,b,X,Y):
     #正向传播
     A=sigmoid(np.dot(w.T,X)+b)
     cost=(-1/m)*(np.sum(Y*np.log(A)+(1-Y)*np.log(1-A)))
-    print(cost)
+
     #反向传播
     dw=(1/m)*(np.dot(X,(A-Y).T))
     db=(1/m)*(np.sum(A-Y))
@@ -89,7 +89,7 @@ def propagate(w,b,X,Y):
     assert (dw.shape==w.shape)
     assert (db.dtype==float)
     cost=np.squeeze(cost)#只有一行或一列的维度（a singleton dimension）被去除掉了
-    print(cost)
+
     assert (cost.shape==())
     grads={
         "dw":dw,
@@ -155,14 +155,14 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
 
 
 
-#测试optimize
-print("====================测试optimize====================")
-w, b, X, Y = np.array([[1], [2]]), 2, np.array([[1,2], [3,4]]), np.array([[1, 0]])
-params , grads , costs = optimize(w , b , X , Y , num_iterations=100 , learning_rate = 0.009 , print_cost = False)
-print ("w = " + str(params["w"]))
-print ("b = " + str(params["b"]))
-print ("dw = " + str(grads["dw"]))
-print ("db = " + str(grads["db"]))
+# #测试optimize
+# print("====================测试optimize====================")
+# w, b, X, Y = np.array([[1], [2]]), 2, np.array([[1,2], [3,4]]), np.array([[1, 0]])
+# params , grads , costs = optimize(w , b , X , Y , num_iterations=100 , learning_rate = 0.009 , print_cost = False)
+# print ("w = " + str(params["w"]))
+# print ("b = " + str(params["b"]))
+# print ("dw = " + str(grads["dw"]))
+# print ("db = " + str(grads["db"]))
 
 
 def predict(w, b, X):
@@ -188,10 +188,10 @@ def predict(w, b, X):
     A = sigmoid(np.dot(w.T, X) + b)
     for i in range(A.shape[1]):
         # 将概率a[0,i]转换为实际预测p[0,i]
-        Y_prediction[0, i] = 1 if A[0, 1] > 0.5 else 0
+        Y_prediction[0, i] = 1 if A[0, i] > 0.5 else 0
         # 使用断言
-        assert (Y_prediction.shape == (1, m))
-        return Y_prediction
+    assert (Y_prediction.shape == (1, m))
+    return Y_prediction
 
 #
 # #测试predict
