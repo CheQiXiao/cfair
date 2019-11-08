@@ -18,18 +18,18 @@ train_set_x_orig , train_set_y , test_set_x_orig , test_set_y , classes = load_d
 # print(classes[np.squeeze(train_set_y[:,index])])
 # plt.show()
 #image.shape[0],image.shape[1],image.shape[2]表示图像长，宽，通道数  image.shape表示图片的维度
-# m_train=train_set_y.shape[1]
-# m_test=test_set_y.shape[1]
-# num_px=train_set_x_orig.shape[1]
+m_train=train_set_y.shape[1]
+m_test=test_set_y.shape[1]
+num_px=train_set_x_orig.shape[1]
 
-# print("训练集的数量：m_train="+str(m_train))
-# print("测试集的数量：m_test="+str(m_test))
-# print("每张图片的高和宽：num_px="+str(num_px))
-# print("每张图片的大小：（"+str(num_px)+","+str(num_px)+",3)")
-# print("训练集图片的维度："+str(train_set_x_orig.shape))
-# print("训练集标签的维度："+str(train_set_y.shape))
-# print("测试集图片的维度："+str(test_set_x_orig.shape))
-# print("测试集标签的维度："+str(test_set_y.shape))
+print("训练集的数量：m_train="+str(m_train))
+print("测试集的数量：m_test="+str(m_test))
+print("每张图片的高和宽：num_px="+str(num_px))
+print("每张图片的大小：（"+str(num_px)+","+str(num_px)+",3)")
+print("训练集图片的维度："+str(train_set_x_orig.shape))
+print("训练集标签的维度："+str(train_set_y.shape))
+print("测试集图片的维度："+str(test_set_x_orig.shape))
+print("测试集标签的维度："+str(test_set_y.shape))
 #X_flatten = X.reshape(X.shape [0]，-1).T ＃X.T是X的转置
 #将训练集的维度降低并转置。这里的-1被理解为unspecified value，意思是未指定为给定的。如果我只需要特定的行数，列数多少我无所谓，我只需要指定行数，那么列数直接用-1代替就行了，计算机帮我们算赢有多少列，反之亦然。
 #如果是reshape(5,-1) 就是将数组变为5行的矩阵，列的话根据具体的来分
@@ -83,8 +83,8 @@ def propagate(w,b,X,Y):
     cost=(-1/m)*(np.sum(Y*np.log(A)+(1-Y)*np.log(1-A)))
     print(cost)
     #反向传播
-    dw=1/m*(np.dot(X,(A-Y).T))
-    db=1/m*(np.sum(A-Y))
+    dw=(1/m)*(np.dot(X,(A-Y).T))
+    db=(1/m)*(np.sum(A-Y))
     # 使用断言确保我的数据是正确的
     assert (dw.shape==w.shape)
     assert (db.dtype==float)
